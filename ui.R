@@ -31,16 +31,14 @@ viz3_tab <- tabPanel(
   sidebarLayout(
     sidebarPanel(
       sliderInput(
-        inputId = "user_select_year", label = h3("Years:"),
-        #min = min(state_vacc$year),
-        min = 2021,
-        max = 2023,
-        #value = c(min(state_vacc$year), max(state_vacc$year)), 
-        value = c(2021, 2023), 
+        inputId = "user_select_date", label = h3("Date:"),
+        min = min(as.Date(state_vacc$date)),
+        max = max(as.Date(state_vacc$date)),
+        value = c(min(as.Date(state_vacc$date)), max(state_vacc$date)), 
         step = 1
       ),
       selectInput(
-        inputId = "user_select_state", label = h3("Select Countries"),
+        inputId = "user_select_state", label = h3("Select States"),
         choices = c("California", "American Samoa", "Washington", "New York State", "Pennsylvania"),
         selected = "Washington",
         multiple = TRUE
