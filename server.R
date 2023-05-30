@@ -19,21 +19,16 @@ server <- function(input, output) {
           effectiveness of vaccination at the state level, the distribution of medical resources, and the 
           comprehensive coverage of healthcare services. Some main questions we are center on includes:")
   })
-  output$questions <- renderText({
-    paste("What is the relationship between the proportion of fully vaccinated people by states and the 
-    political leaning of states? /n Which states have the most efficient utilization of vaccinations in 
-    relation to the number of vaccinations distributed? /n What are the key findings in the total number 
-    of COVID-19 vaccinations administered over the years (2021 to 2023) for the selected states of 
-    significance?")
-  })
+
   output$purpose2 <- renderText({ 
   paste("With these questions in mind, our aim is to derive analytical insights that can provide a 
   foundation for shaping future policies, aspired to inform future policy decisions aimed at increasing 
   vaccine acceptance, improving information dissemination, ensuring equitable access, and boosting overall 
   vaccination rates.")
   })
+  
   output$dataset <- renderText({ 
-    paste("We chose the dataset “us_state_vaccinations.csv” that collected state-by-state data on United 
+    paste("This dataset collected state-by-state data on United 
     States COVID-19 vaccinations which was sourced from Our World in Data (OWID). OWID is a scientific 
     online publication dedicated to addressing global issues such as poverty, disease, and inequality. 
     The Our World in Data team collected and updated the vaccination data daily depending on the most recent
@@ -49,6 +44,7 @@ server <- function(input, output) {
     vaccinated, which typically refers only to adult population. In addition, clinical trials participants on 
     the vaccine arm are excluded since such data is largely unavaliable especially for the ongoing trials.")
   })
+  
   output$limitations <- renderText({
     paste("There are several challenges and limitations that we might need to consider while developing our 
           Shiny app on COVID vaccination data in the US. One of the most significant challenges that we may 

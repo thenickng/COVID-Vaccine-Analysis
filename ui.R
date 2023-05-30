@@ -11,9 +11,15 @@ intro_tab <- tabPanel(
   "Introduction",
   h2("The Purpose of Exploring COVID-19 vaccination Trends"),
   textOutput("purpose1"),
-  textOutput("questions"),
+  h5("What is the relationship between the proportion of fully vaccinated people by states and the 
+    political leaning of states?"),
+  h5("Which states have the most efficient utilization of vaccinations in relation to the number of 
+     vaccinations distributed?"),
+  h5("What are the key findings in the total number of COVID-19 vaccinations administered over the years
+  (2021 to 2023) for the selected states of significance?"),
   textOutput("purpose2"),
-  h2("The Dataset"),
+  h2("The Dataset"),  
+  tags$a(href = "https://data.world/ourworldindata/covid-19-vaccinations/workspace/file?filename=us_state_vaccinations.csv", "US State Vaccination"),
   textOutput("dataset"), 
   h2("Limitations & Challenges"),
   textOutput("limitations")
