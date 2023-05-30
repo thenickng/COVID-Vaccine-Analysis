@@ -8,7 +8,15 @@ state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
 
 # Introductory page
 intro_tab <- tabPanel(
-  "Introductory Page"
+  "Introduction",
+  h2("The Purpose of Exploring COVID-19 vaccination Trends"),
+  textOutput("purpose1"),
+  textOutput("questions"),
+  textOutput("purpose2"),
+  h2("The Dataset"),
+  textOutput("dataset"), 
+  h2("Limitations & Challenges"),
+  textOutput("limitations")
 )
 
 # Visualization 1
