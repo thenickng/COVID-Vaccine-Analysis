@@ -5,6 +5,8 @@ library(lubridate)
 
 # Load data
 state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
+state_vacc$date <- as.Date(state_vacc$date)
+var1 <- colnames(state_vacc)
 
 # Introductory page
 intro_tab <- tabPanel(
@@ -13,7 +15,25 @@ intro_tab <- tabPanel(
 
 # Visualization 1
 viz1_tab <- tabPanel(
-  "Visualization1 Page"
+  "Visualization1 Page",
+  sidebarLayout(
+    sidebarPanel(
+      # Year Selection
+      selectInput(inputId = "year_select",
+                  label = "Please select a year", 
+                  choices = 2020:2023,
+                  selected = "2020"),
+      
+      # Choose what variable they want to see
+      selectInput(inputId = "cat_select",
+                  label = "Select a category", 
+                  choices = var1,
+                  multiple = FALSE)
+    ),
+    mainPanel(
+      plotlyOutput("vacc_map")
+    )
+  )
 )
 
 
