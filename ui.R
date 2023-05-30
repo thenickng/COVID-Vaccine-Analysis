@@ -2,9 +2,16 @@ library(shiny)
 library(plotly)
 library(dplyr)
 library(lubridate)
-
+library(bslib)
 # Load data
 state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
+
+# Theme
+my_theme <- bs_theme(bg = "#0b3d91", #background color
+                     fg = "white", #foreground color
+                     primary = "#FCC780", # primary color
+                     base_font = c("Grandstander", "sans-serif")
+) 
 
 # Introductory page
 intro_tab <- tabPanel(
@@ -76,6 +83,7 @@ conclusion_tab <- tabPanel(
 
 ui <- navbarPage(
   "INFO201 Final Project",
+  theme = my_theme,
   intro_tab,
   viz1_tab,
   viz2_tab,
