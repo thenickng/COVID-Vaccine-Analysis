@@ -2,15 +2,36 @@ library(shiny)
 library(plotly)
 library(dplyr)
 library(lubridate)
-
+library(bslib)
 # Load data
 state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
 state_vacc$date <- as.Date(state_vacc$date)
 var1 <- colnames(state_vacc)
 
+# Theme
+my_theme <- bs_theme(bg = "#0b3d91", #background color
+                     fg = "white", #foreground color
+                     primary = "#FCC780", # primary color
+                     base_font = c("Grandstander", "sans-serif")
+) 
+
 # Introductory page
 intro_tab <- tabPanel(
-  "Introductory Page"
+  "Introduction",
+  h2("The Purpose of Exploring COVID-19 vaccination Trends"),
+  textOutput("purpose1"),
+  h5("What is the relationship between the proportion of fully vaccinated people by states and the 
+    political leaning of states?"),
+  h5("Which states have the most efficient utilization of vaccinations in relation to the number of 
+     vaccinations distributed?"),
+  h5("What are the key findings in the total number of COVID-19 vaccinations administered over the years
+  (2021 to 2023) for the selected states of significance?"),
+  textOutput("purpose2"),
+  h2("The Dataset"),  
+  tags$a(href = "https://data.world/ourworldindata/covid-19-vaccinations/workspace/file?filename=us_state_vaccinations.csv", "US State Vaccination"),
+  textOutput("dataset"), 
+  h2("Limitations & Challenges"),
+  textOutput("limitations")
 )
 
 # Visualization 1
@@ -82,6 +103,7 @@ conclusion_tab <- tabPanel(
 
 ui <- navbarPage(
   "INFO201 Final Project",
+  theme = my_theme,
   intro_tab,
   viz1_tab,
   viz2_tab,
