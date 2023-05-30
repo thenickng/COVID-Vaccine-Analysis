@@ -1,6 +1,7 @@
 library(shiny)
 library(plotly)
 library(dplyr)
+library(lubridate)
 
 # Load data
 state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
@@ -31,22 +32,23 @@ viz3_tab <- tabPanel(
     sidebarPanel(
       sliderInput(
         inputId = "user_select_year", label = h3("Years:"),
-        min = min(state_vacc$year),
-        max = max(state_vacc$year),
-        value = c(min(state_vacc$year), max(state_vacc$year)), 
+        #min = min(state_vacc$year),
+        min = 2021,
+        max = 2023,
+        #value = c(min(state_vacc$year), max(state_vacc$year)), 
+        value = c(2021, 2023), 
         step = 1
       ),
       selectInput(
-        inputId = "user_select_country", label = h3("Select Countries"),
-        choices = state_vacc$state,
-        # need to change !!!!!!!!!!!!!!!!!!!1 choices
+        inputId = "user_select_state", label = h3("Select Countries"),
+        choices = c("California", "American Samoa", "Washington", "New York State", "Pennsylvania"),
         selected = "Washington",
         multiple = TRUE
       )
     ),
     mainPanel(
-      plotlyOutput("state_total_vacc"),
-      textOutput("plot_description")
+      plotlyOutput("state_total_vacc_plot")
+      # textOutput("plot_description")
     )
   )
 )
