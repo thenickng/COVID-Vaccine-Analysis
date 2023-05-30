@@ -8,6 +8,7 @@ state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
 state_vacc$date <- as.Date(state_vacc$date)
 
 
+
 server <- function(input, output) {
   # Intro Part
   output$purpose1 <- renderText({
@@ -20,9 +21,9 @@ server <- function(input, output) {
           effectiveness of vaccination at the state level, the distribution of medical resources, and the 
           comprehensive coverage of healthcare services. Some main questions we are center on includes:")
   })
-
+  
   output$purpose2 <- renderText({ 
-  paste("With these questions in mind, our aim is to derive analytical insights that can provide a 
+    paste("With these questions in mind, our aim is to derive analytical insights that can provide a 
   foundation for shaping future policies, aspired to inform future policy decisions aimed at increasing 
   vaccine acceptance, improving information dissemination, ensuring equitable access, and boosting overall 
   vaccination rates.")
