@@ -32,9 +32,9 @@ viz3_tab <- tabPanel(
     sidebarPanel(
       sliderInput(
         inputId = "user_select_date", label = h3("Date:"),
-        min = min(as.Date(state_vacc$date)),
-        max = max(as.Date(state_vacc$date)),
-        value = c(min(as.Date(state_vacc$date)), max(state_vacc$date)), 
+        min = 2021,
+        max = 2023,
+        value = c(2021, 2023), 
         step = 1
       ),
       selectInput(

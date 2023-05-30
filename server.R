@@ -24,10 +24,12 @@ server <- function(input, output) {
   # Viz3 Part
   output$state_total_vacc_plot <- renderPlotly({
     
-    selected_data <- state_vacc %>% 
-      filter(date %in% input$user_select_date[1]:input$user_select_date[2] & location %in% input$user_select_state)
-    
     state_vacc$date <- as.Date(state_vacc$date)
+    
+    selected_data <- state_vacc %>% 
+      filter(as.integer(substr(date, 1, 4)) >= input$user_select_date[1] &
+               as.integer(substr(date, 1, 4)) <= input$user_select_date[2] &
+               location %in% input$user_select_state)
     
     state_total_vacc_plot <- ggplot(selected_data) +
       geom_line(aes(x = date, y = total_vaccinations, color = location)) +
