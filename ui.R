@@ -30,7 +30,9 @@ intro_tab <- tabPanel(
   textOutput("dataset"), 
   h2("Limitations & Challenges"),
   textOutput("limitations"),
-  tags$img(src = "vaccination-campaign.png")
+  tags$img(src = "https://news.yale.edu/sites/default/files/styles/featured_media/public/vaccination-campaign.jpg?itok=5zUYvkSF&c=a75e254fe1da31f2732f6b0d7bce1413",
+           width = "650px",
+           height = "450px")
 )
 
 # Visualization 1
