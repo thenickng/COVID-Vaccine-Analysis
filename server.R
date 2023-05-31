@@ -73,8 +73,14 @@ server <- function(input, output) {
           vaccination it has. The more red a state is, the fewer vaccination is has.
           In this visualization, you can compare total vaccinations, total distributed, people vaccinated, 
           people fully vaccinated per hundred,total vaccinations per hundred, people fully vaccinated, 
-          people vaccinated per hundred, distributed per hundred, daily vaccinations, daily vaccinations per million, 
-          and share doses used between states. Please select you category in the dropdown below.")
+          people vaccinated per hundred, distributed per hundred, and share doses used between states.")
+  })
+  
+  output$viz1_p2 <- renderText({
+    paste("The reason why we are interest in this is to see which states are actively trying to combat covid.
+          Is it the democratic states or republican states? With this visualization, we can analyze trends in population,
+          political idealogy, and other factors that can help us explain this activeness with vaccines.")
+    
   })
   
   
@@ -107,9 +113,9 @@ server <- function(input, output) {
     most_recent <- state_vacc %>%
       filter(date == max(date) & location != "United States")
     highest <- most_recent %>%
-      filter(!!sym(their_choice) == max(!!sym(their_choice)))
+      filter(!!sym(their_choice) == max(!!sym(their_choice), na.rm = TRUE))
     lowest <- most_recent %>%
-      filter(!!sym(their_choice) == min(!!sym(their_choice)))
+      filter(!!sym(their_choice) == min(!!sym(their_choice), na.rm = TRUE))
     average <- most_recent %>%
       summarise(average = mean(!!sym(their_choice), na.rm = TRUE))
     paste0("On ", max(state_vacc$date), " we can see that ", highest$location, " has the highest ", 

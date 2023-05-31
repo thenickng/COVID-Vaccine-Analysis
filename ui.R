@@ -8,8 +8,8 @@ state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
 state_vacc$date <- as.Date(state_vacc$date)
 #<<<<<<< HEAD
 var1 <- c("total vaccinations", "total distributed", "people vaccinated", "people fully vaccinated per hundred",
-          "total vaccinations per hundred", "people fully vaccinated", "people vaccinated per hundred", "distributed per hundred",
-          "daily vaccinations", "daily vaccinations per million", "share doses used")
+          "total vaccinations per hundred", "people fully vaccinated", "people vaccinated per hundred", 
+          "distributed per hundred", "share doses used")
 
 # Theme
 my_theme <- bs_theme(bg = "#009EDB", #background color
@@ -45,7 +45,6 @@ viz1_tab <- tabPanel(
   sidebarLayout(
     sidebarPanel(
       
-      textOutput("viz1_intro"),
       
       # Choose what variable they want to see
       selectInput(inputId = "cat_select",
@@ -55,6 +54,11 @@ viz1_tab <- tabPanel(
     ),
     mainPanel(
       plotlyOutput("vacc_map"),
+      h4("Plot Description"),
+      textOutput("viz1_intro"),
+      br(),
+      textOutput("viz1_p2"),
+      br(),
       textOutput("viz1_details")
     )
   )
