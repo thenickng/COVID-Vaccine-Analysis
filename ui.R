@@ -6,14 +6,14 @@ library(bslib)
 # Load data
 state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
 state_vacc$date <- as.Date(state_vacc$date)
-<<<<<<< HEAD
+#<<<<<<< HEAD
 var1 <- c("total vaccinations", "total distributed", "people vaccinated", "people fully vaccinated per hundred",
           "total vaccinations per hundred", "people fully vaccinated", " people vaccinated per hundred", "distributed per hundred",
           "daily vaccinations raw", "daily vaccinations", "daily vaccinations per million", "share_doses_used")
 
-=======
+#=======
 var1 <- colnames(state_vacc)
->>>>>>> f66c2582b662fc4d071f98fe81693437ecb5d8a9
+#>>>>>>> f66c2582b662fc4d071f98fe81693437ecb5d8a9
 # Theme
 my_theme <- bs_theme(bg = "#009EDB", #background color
                      fg = "white", #foreground color
@@ -94,8 +94,9 @@ viz3_tab <- tabPanel(
       )
     ),
     mainPanel(
-      plotlyOutput("state_total_vacc_plot")
-      # textOutput("plot_description")
+      plotlyOutput("state_total_vacc_plot"),
+      h4("Plot description"),
+      htmlOutput("plot_description")
     )
   )
 )
