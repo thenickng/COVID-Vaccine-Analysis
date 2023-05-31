@@ -96,10 +96,14 @@ server <- function(input, output) {
   
   # Viz3 Part
   output$state_total_vacc_plot <- renderPlotly({
+    
+    state_vacc$date <- as.Date(state_vacc$date)
+    
     selected_data <- state_vacc %>% 
       filter(as.integer(substr(date, 1, 4)) >= input$user_select_date[1] &
                as.integer(substr(date, 1, 4)) <= input$user_select_date[2] &
-               location %in% input$user_select_state)
+               location %in% input$user_select_state &
+               !is.na(total_vaccinations))
     
     state_total_vacc_plot <- ggplot(selected_data) +
       geom_line(aes(x = date, y = total_vaccinations, color = location)) +
@@ -110,10 +114,15 @@ server <- function(input, output) {
       scale_x_date(date_labels = "%Y", date_breaks = "year") +
       scale_y_continuous(labels = label_number_si()) +
       scale_color_brewer(palette = "Set2")
-
+    
     return(ggplotly(state_total_vacc_plot))
   })
   
+  # Viz3 description
+  output$plot_description <- renderUI({
+    description <- paste("The line chart above shows the total vaccinations or saying total number of COVID-19 doses administered in each year from 2021 to 2023 for California, New York State, Pennsylvania, Washington, and American Samoa."," ", "I choose the line plot to visualize the total vaccination data for the five states - California, New York State, Pennsylvania, Washington, and American Samoa - because it effectively reveals the trend and changes in the number of vaccinations administered over the years. The line plot is clearly showing the difference on the number of total vaccinations each states administered and it's a great tool for comparing between the data. It also easily to see the trend of the vaccinations through the line plot, whether it is increasing in a higher rate or lower rate through years.", " ", "Based on the plot, we can see California has the most total vaccinations of COVID in these five states and it's increasing in a high rate between year to year. Comparatively, the other four states are increasing at a lower rate than California. In these five states, we can see total vaccinations in American Samoa from the chart is almost stay in the value of 0, which is due to the number of total vaccinations here has a comparatively low number than the other states(e.g. total vaccination in California in 2021:816301, total vaccination in American Samoa in 2021: 2124). From the plot, all of the total vaccinations in five states are increasing at a higher rate between 2021 to 2022 than 2022 to 2023.", " ", "The reason to choose these five states:", "-- California: State with the highest number of COVID-19 cases", "-- American Samoa: State with the lowest COVID-19 cases", "-- New York State: State with most death due to the COVID-19", "-- Pennsylvania: State with the highest death ratio of COVID-19", "-- Washington: State with the earliest COVID-19 case", sep="<br/>")
+    HTML(description)
+  })
   
   
   
