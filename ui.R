@@ -6,7 +6,9 @@ library(bslib)
 # Load data
 state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
 state_vacc$date <- as.Date(state_vacc$date)
-var1 <- colnames(state_vacc)
+var1 <- c("total vaccinations", "total distributed", "people vaccinated", "people fully vaccinated per hundred",
+          "total vaccinations per hundred", "people fully vaccinated", " people vaccinated per hundred", "distributed per hundred",
+          "daily vaccinations raw", "daily vaccinations", "daily vaccinations per million", "share_doses_used")
 
 # Theme
 my_theme <- bs_theme(bg = "#0b3d91", #background color
@@ -42,7 +44,7 @@ viz1_tab <- tabPanel(
       # Year Selection
       selectInput(inputId = "year_select",
                   label = "Please select a year", 
-                  choices = 2020:2023,
+                  choices = 2021:2023,
                   selected = "2020"),
       
       # Choose what variable they want to see

@@ -5,7 +5,7 @@ library(scales)
 
 # Load data
 state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
-state_vacc$date <- as.Date(state_vacc$date)
+state_vacc$date <- as.Date(state_vacc$date, "%Y-%m-%d")
 
 
 server <- function(input, output) {
@@ -66,20 +66,24 @@ server <- function(input, output) {
   # Viz1 Part
   output$vacc_map <- renderPlotly({
     state_vacc$location <- tolower(state_vacc$location)
+    their_cat <- gsub(" ", "_", input$cat_select)
     latest_state_vacc <- state_vacc %>%
-      filter(input$year_select == format(date, "%Y"))%>%
-      group_by(location)
+      filter(year(as.Date(date)) == input$year_select) %>%
+      group_by(location) %>%
+      summarise(category = mean(.data[[their_cat]], na.rm = TRUE))
     state_shape <- map_data("state")
     combined_vacc_state <- left_join(state_shape, latest_state_vacc, by = c("region" = "location"))
       viz1 <- ggplot(combined_vacc_state) +
       geom_polygon(mapping = aes(x = long,
                                  y = lat,
                                  group = group,
-                                 fill = input$cat_select)) +
+                                 text = region,
+                                 fill = category)) +
       scale_fill_continuous(low = 'red',
                             high = 'green',
                             labels = label_number_si()) +
-      labs(title = paste(input$cat_select, "in", input$year_select))
+      labs(title = paste("Average", input$cat_select, "in", input$year_select),
+           fill = paste("Average", input$cat_select))
     return(ggplotly(viz1))
   })
   
