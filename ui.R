@@ -11,12 +11,6 @@ var1 <- c("total vaccinations", "total distributed", "people vaccinated", "peopl
           "total vaccinations per hundred", "people fully vaccinated", "people vaccinated per hundred", "distributed per hundred",
           "daily vaccinations", "daily vaccinations per million", "share_doses_used")
 
-#=======
-<<<<<<< HEAD
-=======
-var1 <- colnames(state_vacc)
->>>>>>> 16ea80164634de80306e5ab1e74a40a359f4c400
-#>>>>>>> f66c2582b662fc4d071f98fe81693437ecb5d8a9
 # Theme
 my_theme <- bs_theme(bg = "#009EDB", #background color
                      fg = "white", #foreground color
