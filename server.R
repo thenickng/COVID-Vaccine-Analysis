@@ -65,6 +65,18 @@ server <- function(input, output) {
           insights to our users.")
   })
   
+  # Viz1 Intro
+  output$viz1_intro <- renderText({
+    paste("This visualization allows us to analyze each aspect of our data for each individual state. Unfortunately, New 
+          York does not have their information available, but we still can compare the status of each state in combating covid. 
+          Once you select a category, you can see a state's activeness in taking vaccines. The more green a state is, the more
+          vaccination it has. The more red a state is, the fewer vaccination is has.
+          In this visualization, you can compare total vaccinations, total distributed, people vaccinated, 
+          people fully vaccinated per hundred,total vaccinations per hundred, people fully vaccinated, 
+          people vaccinated per hundred, distributed per hundred, daily vaccinations, daily vaccinations per million, 
+          and share doses used between states. Please select you category in the dropdown below.")
+  })
+  
   
   # Viz1 Part
   output$vacc_map <- renderPlotly({
@@ -88,6 +100,25 @@ server <- function(input, output) {
            fill = input$cat_select)
     return(ggplotly(viz1))
   })
+  
+  # Viz1 Results
+  output$viz1_details <- renderText({
+    their_choice <- gsub(" ", "_", input$cat_select)
+    most_recent <- state_vacc %>%
+      filter(date == max(date) & location != "United States")
+    highest <- most_recent %>%
+      filter(!!sym(their_choice) == max(!!sym(their_choice)))
+    lowest <- most_recent %>%
+      filter(!!sym(their_choice) == min(!!sym(their_choice)))
+    average <- most_recent %>%
+      summarise(average = mean(!!sym(their_choice), na.rm = TRUE))
+    paste0("On ", max(state_vacc$date), " we can see that ", highest$location, " has the highest ", 
+           input$cat_select, " with ", highest[[their_choice]], " and ", lowest$location, " has the lowest with ",
+           lowest[[their_choice]], ". The average ", input$cat_select, " in the United States is ", 
+           round(average$average, 2), ".")
+  })
+  
+  
   
   # Viz2 Part
   
