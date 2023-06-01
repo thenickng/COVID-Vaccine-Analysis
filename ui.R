@@ -68,10 +68,36 @@ viz1_tab <- tabPanel(
 
 # Visualization 2
 viz2_tab <- tabPanel(
-  "Visualization2 Page"
+  "Visualization2 Page",
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("dateSlider",
+                  "Select Date",
+                  min = as.Date("2021-01-12"),
+                  max = as.Date("2023-05-10"),
+                  value = as.Date("2023-05-10")
+      ),
+      
+      sliderInput("numCountries",
+                  "Select Number of Countries",
+                  min = 1,
+                  max = 20,  
+                  value = 10
+      ),
+      
+    
+    ),
+    mainPanel(
+      plotlyOutput("bar_chart"),
+      h4("Plot Description"),
+      textOutput("viz2_intro"),
+      br(),
+      textOutput("viz2_p2"),
+      br(),
+      textOutput("viz2_details")
+    )
+  )
 )
-
-
 
 # Visualization 3
 viz3_tab <- tabPanel(

@@ -5,6 +5,7 @@ library(scales)
 library(rlang)
 library(stringr)
 library(lubridate)
+library(tidyverse)
 
 
 # Load data
@@ -129,9 +130,39 @@ server <- function(input, output) {
   
   
   # Viz2 Part
-  
-  
-  
+  output$bar_chart <- renderPlotly({ 
+    temp_df <- state_vacc %>%
+      filter(!is.na(date)) %>%
+      filter(!is.na(total_vaccinations)) %>%
+      filter(!is.na(total_distributed)) %>%
+      filter(!is.na(total_vaccinations)) %>%
+      filter(!is.na(location))
+    
+    filtered_data <- temp_df %>%
+      filter(as.Date(date) == as.Date(input$dateSlider)) %>%
+      filter(!is.na(date) & as.Date(date) == input$dateSlider) 
+      
+    top_states <- filtered_data %>%
+      mutate(ratio = total_vaccinations / total_distributed) %>%
+      arrange(desc(ratio)) %>%
+      head(input$numCountries) 
+    
+    bar_chart <- ggplot(top_states, aes(x = reorder(location, -ratio), y = ratio)) +
+      geom_bar(stat = "identity", fill = "blue") +
+      labs(
+        title = "Top Entities with Highest Vaccination Ratio",
+        x = "State",
+        y = "Vaccination Ratio"
+      ) +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    
+    ggplotly(bar_chart)  
+  })
+  # Viz2 description
+  output$plot_description <- renderUI({
+    description <- paste("This insightful visualization explores vaccination ratios across various states and spans a certain time period. It's a product of careful research, compiling data from credible health departments and agencies. The graph isn't just a bunch of numbers—it's a clear portrayal of our progress in the battle against disease through the power of immunization. Our goal with this graph is to make vaccination data more accessible, allowing for an in-depth comparison across regions. Presenting the data visually helps foster informed discussions about public health strategies, ultimately guiding us towards effective vaccination initiatives. Think of this as a snapshot of our nation's health narrative, demonstrating the intricate dance between policy-making, healthcare infrastructure, and public response.", sep="<br/>")
+    HTML(description)
+  })
   
   # Viz3 Part
   output$state_total_vacc_plot <- renderPlotly({
