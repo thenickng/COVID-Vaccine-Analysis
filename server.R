@@ -4,6 +4,8 @@ library(dplyr)
 library(scales)
 library(rlang)
 library(stringr)
+library(lubridate)
+
 
 # Load data
 state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
@@ -128,4 +130,11 @@ server <- function(input, output) {
   
   
   # Conclusion Part
+  output$conclusion1 <- renderText({
+    paste("The World Health Organization (WHO) had made monumental changes when they officially declared COVID-19 to be a persistent health issue and no longer a global health emergency after three long years. The pandemic has drastically changed peoples lives and many individuals and groups of people are still dealing with the fallout of the pandemic and its ongoing effects. COVID-19 not only changed the lives of people, but also played a trivial role in dividing the nation based on political views. 
+According to the data that was collected and analyzed throughout this project there was a discernible relationship between Right states and low vaccination rates, which was a clear juxtaposition to Left states and high vaccination rates. When comparing “Total Vaccinations Per Hundred” in Visualization 1, majority right leaning Southeastern states had low vaccination rates, with every state in that area having less than 200 vaccinations per hundred, with states such as Alabama, Louisiana and Mississippi, having less than 150 vaccinations per hundred. However, Western and Northeastern states, where the majority is left leaning politically, had the highest vaccination rates per 100 in the Country. Though there are fewer percentages of people willing to get vaccinated in red leaning states, these states are also faced with less distributed vaccines per 100, with states such as Louisiana and Wyoming having less than 250 distributed vaccines per 100. 
+This comparison is vital as people living in these states are not provided with the necessary amount of vaccines and therefore do not have equal access to vaccines compared to people living in left leaning states. The data analyzed is extremely important as it shows that not only do these states have less vaccines provided per 100, but they also have a lower utility rate for vaccinations. Future policies should focus on both ensuring correct information dissemination and equal access to vaccinations and vaccination sites. Based on the large amount of falsified information and its effects on the low percentage of vaccinations, campaigns need to focus on spreading correct information. In addition, a larger amount of vaccination sites should be placed in these areas with greater volumes of vaccines being sent to these sites. This initiative has to be taken so that no matter their political beliefs or location, everybody will have equal access to life saving vaccines.
+")
+    
+  })
 }

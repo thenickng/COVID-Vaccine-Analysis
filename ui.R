@@ -3,6 +3,7 @@ library(plotly)
 library(dplyr)
 library(lubridate)
 library(bslib)
+
 # Load data
 state_vacc <- read.csv("us_state_vaccinations.csv", stringsAsFactors = FALSE)
 state_vacc$date <- as.Date(state_vacc$date)
@@ -97,7 +98,11 @@ viz3_tab <- tabPanel(
 
 # Conclusion Page
 conclusion_tab <- tabPanel(
-  "Conclusion Page"
+  "Conclusion",
+  h2("The Impacts of Covid-19 Vaccination Trends"),
+  textOutput("conclusion1")
+  
+  
 )
 
 
