@@ -6,6 +6,8 @@ library(rlang)
 library(stringr)
 library(lubridate)
 library(tidyverse)
+library(ggplot2)
+library(maps)
 
 
 # Load data
@@ -158,10 +160,19 @@ server <- function(input, output) {
     
     ggplotly(bar_chart)  
   })
+  
   # Viz2 description
-  output$plot_description <- renderUI({
-    description <- paste("This insightful visualization explores vaccination ratios across various states and spans a certain time period. It's a product of careful research, compiling data from credible health departments and agencies. The graph isn't just a bunch of numbers—it's a clear portrayal of our progress in the battle against disease through the power of immunization. Our goal with this graph is to make vaccination data more accessible, allowing for an in-depth comparison across regions. Presenting the data visually helps foster informed discussions about public health strategies, ultimately guiding us towards effective vaccination initiatives. Think of this as a snapshot of our nation's health narrative, demonstrating the intricate dance between policy-making, healthcare infrastructure, and public response.", sep="<br/>")
-    HTML(description)
+  output$viz2_details <- renderText({
+    paste("This insightful visualization explores vaccination ratios across various states 
+    and spans a certain time period. It's a product of careful research, compiling data 
+    from credible health departments and agencies. The graph isn't just a bunch of 
+    numbers—it's a clear portrayal of our progress in the battle against disease through 
+    the power of immunization. Our goal with this graph is to make vaccination data more 
+    accessible, allowing for an in-depth comparison across regions. Presenting the data 
+    visually helps foster informed discussions about public health strategies, ultimately 
+    guiding us towards effective vaccination initiatives. Think of this as a snapshot of 
+    our nation's health narrative, demonstrating the intricate dance between policy-making,
+    healthcare infrastructure, and public response.")
   })
   
   # Viz3 Part

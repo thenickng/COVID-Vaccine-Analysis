@@ -49,7 +49,7 @@ viz1_tab <- tabPanel(
       
       # Choose what variable they want to see
       selectInput(inputId = "cat_select",
-                  label = "**Select a category**", 
+                  label = "Select a vaccine category", 
                   choices = var1,
                   multiple = FALSE)
     ),
@@ -134,7 +134,6 @@ conclusion_tab <- tabPanel(
   "Conclusion",
   h2("The Impacts of Covid-19 Vaccination Trends"),
   textOutput("conclusion1")
-  
   
 )
 
