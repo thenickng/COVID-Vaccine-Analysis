@@ -42,7 +42,7 @@ intro_tab <- tabPanel(
 
 # Visualization 1
 viz1_tab <- tabPanel(
-  "Visualization1 Page",
+  "State Vaccination Differences",
   sidebarLayout(
     sidebarPanel(
       
@@ -68,7 +68,7 @@ viz1_tab <- tabPanel(
 
 # Visualization 2
 viz2_tab <- tabPanel(
-  "Visualization2 Page",
+  "Vaccination Ratios",
   sidebarLayout(
     sidebarPanel(
       sliderInput("dateSlider",
@@ -101,7 +101,7 @@ viz2_tab <- tabPanel(
 
 # Visualization 3
 viz3_tab <- tabPanel(
-  "Visualization3 Page",
+  "Vaccination Administered",
   h1("Total Vaccinations (COVID-19 doses) administered from 2021 to 2023 for Selected States"),
   sidebarLayout(
     sidebarPanel(
