@@ -1,4 +1,4 @@
-
+#COVID Vaccine Analysis
 ## INFO 201 "Foundational Skills for Data Science" — Winter 2023
 
 Authors: Nick Ng, Sally Shen, Candice Hu, Sid Thiagarajan, Anushka Damidi
